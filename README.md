@@ -52,3 +52,18 @@ Some output files will have a prefix as designated by `--prefix`. Following our 
 |CAMP_nomenclature_logs/CAMP_nomencalture_logs| This directory contains the actual log files from each run, allowing you to run the main script multiple times and aggregate results. | Filenames will have a timestamped format such as `wgst_log_2023-05-30@10-24-42.txt`. |
 |CAMP_nomenclature_logs/change_log| This directory contains log files of how allele codes have changed over time. | The files are timestamped, e.g., `2023-05-30.tsv` |
 |CAMP_nomenclature_srcfiles | source files | |
+
+## Flowchart
+
+```mermaid
+flowchart LR
+    A[New cgMLST Profile] --> B[Calculate Distance to Founders]
+    B --> C[Filter to founders within distance threshold]
+    C --> D{ }
+    D --> E[Single Reference Remains]
+    D --> F[Multiple References Remain]
+    D --> G[No Reference Remains]
+    E --> H["Retain reference number (1)"]
+    F --> I["Change code with fewer members to the other,\nReassess each subsequent positions' members"]
+    G --> J["Assign next integer,\nWrite retained code to database field (e.g., 1.1.2.1.5)"]
+```
